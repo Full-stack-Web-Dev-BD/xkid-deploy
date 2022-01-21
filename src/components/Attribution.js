@@ -10,7 +10,7 @@ export const Attribution = () => {
             display: "flex",
             alignItems: "center"
         }}>
-        <img width={16} src={`${getBaseURL()}/images/buildship.png`} />
+        <img alt='#' width={16} src={`${getBaseURL()}/images/buildship.png`} />
         <span style={{
             marginLeft: 6,
             fontSize: 14,

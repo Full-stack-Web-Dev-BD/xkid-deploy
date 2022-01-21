@@ -11,19 +11,22 @@ const Mint = () => {
     const [isWhitelist, setIsWhitelist] = useState(null)
     const [acc, setAcc] = useState(null)
     const [myNFT, setMyNFT] = useState(0)
-    useEffect(async () => {
-        setAcc(await window.ethereum.enable())
-        window.web3 = new Web3(window.web3.currentProvider);
-        var chainID = await window.web3.eth.getChainId()
-        if (chainID !== 3) return alert("Please switch your network to Ropsten in Metamask in order to work ")
+    useEffect(() => {
+        async function initMe() {
+            setAcc(await window.ethereum.enable())
+            window.web3 = new Web3(window.web3.currentProvider);
+            var chainID = await window.web3.eth.getChainId()
+            if (chainID !== 3) return alert("Please switch your network to Ropsten in Metamask in order to work ")
 
-        var MyContract = contract(contractJson)
-        MyContract.setProvider(window.web3.currentProvider);
-        contractInstance.current = await MyContract.deployed()
-        console.log("contract", contractInstance.current)
-        var isWhiteList = await contractInstance.current.whitelistOnly()
-        balanceUpdate()
-        setIsWhitelist(isWhiteList)
+            var MyContract = contract(contractJson)
+            MyContract.setProvider(window.web3.currentProvider);
+            contractInstance.current = await MyContract.deployed()
+            console.log("contract", contractInstance.current)
+            var isWhiteList = await contractInstance.current.whitelistOnly()
+            balanceUpdate()
+            setIsWhitelist(isWhiteList)
+        }
+        initMe()
     }, [])
     async function balanceUpdate() {
         var chainID = await window.web3.eth.getChainId()
@@ -55,14 +58,14 @@ const Mint = () => {
         <div className='container  col-md-4 offset-md-4'>
             <div className='mt-5 card p-4'>
                 {
-                    isMinting == 1 ?
+                    isMinting === 1 ?
                         <h2 className='alert alert-warning' > <span className='mr-3' ><i class="far fa-clock"></i></span>  Minting in progress ... </h2> : ''
                 } {
                     isPending ?
                         <h2 className='alert alert-warning' > <span className='mr-3' ><i class="far fa-clock"></i></span>  Requiest in pending ... </h2> : ''
                 }
                 {
-                    isMinting == 2 ?
+                    isMinting === 2 ?
                         <h2 className='alert alert-success' > <span className='mr-3' ><i class="far fa-check-circle"></i></span>  Minting Success !!   </h2> : ''
                 }
                 <h4>Ropsten Test Network </h4>

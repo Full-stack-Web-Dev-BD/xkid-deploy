@@ -35,7 +35,7 @@ export const PaymentModalStep = ({ quantity }) => {
     return <>
         {paymentOptions.map((option) =>
             <Box sx={styles.mintOption} onClick={option.onClick}>
-                <img width="128" src={option.image} />
+                <img alt='#' width="128" src={option.image} />
                 <Typography sx={{ mt: 2 }} variant="h6">{option.title}</Typography>
                 <Typography variant="subtitle2">{option.subtitle}</Typography>
                 <Typography variant="subtitle2">{option.fee}</Typography>

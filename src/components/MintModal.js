@@ -3,7 +3,6 @@ import { Box, CircularProgress, Dialog, DialogContent, DialogTitle, IconButton, 
 import CloseIcon from '@mui/icons-material/Close';
 import { QuantityModalStep } from './QuantityModalStep';
 import { PaymentModalStep } from './PaymentModalStep';
-import { getBaseURL } from '../constants';
 
 const DialogTitleWithClose = ({ children, onClose }) => {
     return <DialogTitle>
@@ -20,8 +19,8 @@ const DialogTitleWithClose = ({ children, onClose }) => {
                     color: (theme) => theme.palette.grey[500],
                 }}
             >
-            <CloseIcon />
-        </IconButton>) : null}
+                <CloseIcon />
+            </IconButton>) : null}
     </DialogTitle>
 }
 
@@ -44,8 +43,8 @@ export const MintModal = (props, ref) => {
     }
 
     useImperativeHandle(ref, () => ({
-            setIsOpen, setQuantity
-        })
+        setIsOpen, setQuantity
+    })
     )
 
     return (
@@ -69,31 +68,31 @@ export const MintModal = (props, ref) => {
                     }}>
                         👋
                     </span>}
-                    <Typography sx={{mt: 3}} variant="subtitle1">{
+                    <Typography sx={{ mt: 3 }} variant="subtitle1">{
                         txHash
-                        ? `Minting ${quantity} NFT...`
-                        : 'Confirm the transaction in your wallet'
+                            ? `Minting ${quantity} NFT...`
+                            : 'Confirm the transaction in your wallet'
                     }</Typography>
                     {!txHash && <Typography sx={{
                         mt: 1,
                         color: "#757575",
                         textAlign: "center"
-                    }} variant="subtitle2">Wait until transaction window appears.<br/>If you don't see the Confirm button, scroll down ⬇️</Typography>}
+                    }} variant="subtitle2">Wait until transaction window appears.<br />If you don't see the Confirm button, scroll down ⬇️</Typography>}
                 </Box>
             }
             {!isLoading && <>
-            <DialogTitleWithClose onClose={handleClose}>
-                {step === 1 ? "Choose how many to mint" : "Pay with"}
-            </DialogTitleWithClose>
-            <DialogContent style={styles.mintModalContent}>
-                {step === 1 && <QuantityModalStep
-                    setTxHash={setTxHash}
-                    setQuantity={setQuantity}
-                    setStep={setStep}
-                    setIsLoading={setIsLoading}
-                />}
-                {step === 2 && <PaymentModalStep quantity={quantity} />}
-            </DialogContent>
+                <DialogTitleWithClose onClose={handleClose}>
+                    {step === 1 ? "Choose how many to mint" : "Pay with"}
+                </DialogTitleWithClose>
+                <DialogContent style={styles.mintModalContent}>
+                    {step === 1 && <QuantityModalStep
+                        setTxHash={setTxHash}
+                        setQuantity={setQuantity}
+                        setStep={setStep}
+                        setIsLoading={setIsLoading}
+                    />}
+                    {step === 2 && <PaymentModalStep quantity={quantity} />}
+                </DialogContent>
             </>}
         </Dialog>
     )

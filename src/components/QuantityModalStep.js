@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, DialogContent, Slider } from '@mui/material';
+import { Box, Button, Slider } from '@mui/material';
 import { getDefaultMaxTokensPerMint, getMaxTokensPerMint, mint } from '../mint/web3';
 import { showAlert } from './AutoHideAlert';
 import { parseTxError } from '../utils';
 import { Attribution } from './Attribution';
-import { getCurrentNetwork } from '../wallet';
 
 export const QuantityModalStep = ({ setQuantity, setStep, setIsLoading, setTxHash }) => {
     const [quantityValue, setQuantityValue] = useState(1)
